@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
+import Main from "./pages/Main";
 import ForgotPassword from "./pages/ForgotPassword";
 import Header from "./components/Header";
 import { ToastContainer } from "react-toastify";
@@ -20,6 +21,7 @@ function App() {
                 <Route path="/sign-in" element={<SignIn />}></Route>
                 <Route path="/sign-up" element={<SignUp />}></Route> 
                 <Route path="/forgot-password" element={<ForgotPassword />}></Route>  
+                <Route path="/main" element={<Main />}></Route>  
             </Routes>
         </Router>
         <ToastContainer
