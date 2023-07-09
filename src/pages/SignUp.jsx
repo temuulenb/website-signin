@@ -50,20 +50,20 @@ export default function SignUp() {
         <div className="flex justify-center flex-wrap items-center px-6 py-12 max-w-6xl mx-auto">
             <div className="md:w-[67%] lg:w-[50%] mb-12 md:mb-6">
                 <img src="https://images.unsplash.com/photo-1610366996539-be33ac477245?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=866&q=80" 
-                alt="key" className="w-full rounded-xl" />
+                alt="key" className="w-full mt-5 rounded-xl" />
             </div>
             <div className="w-full md:w-[67%] lg:w-[40%] lg:ml-20">
                 <form onSubmit={onSubmit}>
                   <input 
-                    className="mb-6 w-full px-4 py-2 text-xl text-gray-700 bg-white 
-                    border-gray-300 rounded transition ease-in-out"                    
+                    className="mb-6 w-full px-4 py-1 text-s text-gray-700 bg-white 
+                    border-gray-300 rounded transition ease-in-out"                      
                     type="text" 
                     id="name" 
                     value={name} 
                     onChange={onChange} 
                     placeholder="Full Name"/>
                     <input 
-                    className="mb-6 w-full px-4 py-2 text-xl text-gray-700 bg-white 
+                    className="mb-6 w-full px-4 py-1 text-s text-gray-700 bg-white 
                     border-gray-300 rounded transition ease-in-out"                    
                     type="email" 
                     id="email" 
@@ -72,7 +72,7 @@ export default function SignUp() {
                     placeholder="Email address"/>
                     <div className="relative mb-6">
                         <input 
-                        className="w-full px-4 py-2 text-xl text-gray-700 bg-white 
+                        className="w-full px-4 py-1 text-s text-gray-700 bg-white 
                         border-gray-300 rounded transition ease-in-out"
                         type={showPassword ? "text" : "password"} 
                         id="password" 
@@ -80,14 +80,14 @@ export default function SignUp() {
                         onChange={onChange} 
                         placeholder="Password"/>
                         {showPassword ? ( 
-                            <AiFillEyeInvisible className="absolute right-3 top-3 
-                            text-xl cursor-pointer" 
+                            <AiFillEyeInvisible className="absolute right-3 top-2 
+                            text-l cursor-pointer" 
                             onClick={() => setShowPassword
                             ((prevState)  => !prevState)}
                            /> 
                         ) : (
-                            <AiFillEye className="absolute right-3 top-3 
-                            text-xl cursor-pointer"
+                            <AiFillEye className="absolute right-3 top-2 
+                            text-l cursor-pointer"
                             onClick={() => setShowPassword
                             ((prevState)  => !prevState)}
                             /> 
@@ -105,7 +105,7 @@ export default function SignUp() {
                           hover:text-blue-900 transition duration-200 ease-in-out">Forgot password?</Link>
                         </p>
                     </div>
-                    <button className="w-full bg-blue-600 text-white px-7 py-3 text-small font-medium
+                    <button className="w-full bg-blue-600 text-white px-5 py-2 text-sm font-medium
                     uppercase rounded shadow-lg hover:bg-blue-800 transition duration-150 ease-in-out 
                     hover:shadow-lg active:bg-blue-900" 
                     type="submit">Sign Up</button>
