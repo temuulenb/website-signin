@@ -39,7 +39,7 @@ export default function SignUp() {
 
       await setDoc(doc(db, "users", user.uid), formDataCopy);
       //toast.success("Signed up successfully");//
-      navigate("/main");
+      navigate("/");
     } catch (error) {
         toast.error("Something went wrong with the registration");
     }
@@ -90,19 +90,14 @@ export default function SignUp() {
                             text-l cursor-pointer"
                             onClick={() => setShowPassword
                             ((prevState)  => !prevState)}
-                            /> 
-                        )}  
+                            />)}
                     </div>
+                    
                     <div className="flex justify-between whitespace-nowrap text-sm sm:text-lg">
                         <p className="mb-6">
                           Have an account?
                           <Link to="/sign-in" className="text-red-500
                           hover:text-red-800 transition duration-200 ease-in-out ml-1">Sign In</Link>
-                        </p>
-                        <p>
-                          <Link to="/forgot-password"
-                          className="text-blue-500
-                          hover:text-blue-900 transition duration-200 ease-in-out">Forgot password?</Link>
                         </p>
                     </div>
                     <button className="w-full bg-blue-600 text-white px-5 py-2 text-sm font-medium
