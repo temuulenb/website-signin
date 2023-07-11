@@ -53,7 +53,7 @@ export default function Profile() {
                       value={name}
                       disabled={!changeDetail}
                       onChange={onChange}
-                      className={`w-[65%] px-4 py-1 text-md text-black bg-white border border-gray-300
+                      className={`w-[65%] ml-14 px-4 py-1 text-md text-black bg-white border border-gray-300
                       rounded transition ease-in-out mb-5 ${changeDetail && "bg-red-200 focus:bg-red-200"}`}/>
 
                       { /* email input */ } 
@@ -62,10 +62,10 @@ export default function Profile() {
                       id='email' 
                       value={email}
                       disabled
-                      className="w-[65%] px-4 py-1 text-md text-black bg-white border border-gray-300
+                      className="w-[65%] ml-14 px-4 py-1 text-md text-black bg-white border border-gray-300
                       rounded transition ease-in-out mb-1"/>
 
-                      <div className="flex whitespace-nowrap text-sm sm:text-md mb-5">
+                      <div className="flex whitespace-nowrap text-sm sm:text-md mb-10 ml-14">
                           <p className="flex items-center">Do you want to make changes?
                             <span 
                             onClick={() => {
@@ -80,18 +80,19 @@ export default function Profile() {
                       </div>
                       <button 
                       onClick={onLogout} 
-                      className="bg-blue-600 text-white px-3 py-1 ml-40 text-sm font-medium
+                      className="bg-blue-600 text-white px-3 py-1 ml-52 text-sm font-medium
                       rounded shadow-lg hover:bg-blue-800 transition duration-150 ease-in-out 
                       hover:shadow-lg active:bg-blue-900">Sign Out</button>
                 </form>
-            </div>
-            <button type='submit' className='text-center mt-4 bg-blue-200 text-black uppercase px-5 py-2
+                <button type='submit' className='ml-32 mt-5 bg-blue-200 text-black uppercase px-5 py-2
                     text-sm font-bold rounded shadow-md hover:bg-blue-400 transition duration ease-in-out hover:shadow-lg
                     active:bg-blue-500'>
                         <Link to="/create-listing" className='flex justify-center'>
                             Make New announcement
                         </Link>  
-            </button>
+                </button>
+            </div>
+            
         </section>
     </div>
   )
