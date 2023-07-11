@@ -1,10 +1,14 @@
-import { getAuth } from 'firebase/auth';
+import { getAuth, updateProfile } from 'firebase/auth';
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify';
+import { db } from '../firebase';
+import { updateDoc, doc } from 'firebase/firestore';
 
 export default function Profile() {
   const auth = getAuth();
   const navigate = useNavigate();
+  const [changeDetail, setChangeDetail] = useState(false);
   const [formData, setFormData] = useState({
       name: auth.currentUser.displayName,
       email: auth.currentUser.email,
@@ -13,6 +17,28 @@ export default function Profile() {
   function onLogout() {
       auth.signOut();
       navigate("/");
+  }
+  function onChange(e) {
+      setFormData((prevState) => ({
+          ...prevState,
+          [e.target.id]: e.target.value,
+      }));
+  }
+  async function onSubmit() {
+      try {
+          if(auth.currentUser.displayName !== name){
+              await updateProfile(auth.currentUser, {
+                displayName:name,
+              });
+              const docRef = doc(db, "users", auth.currentUser.uid);
+              await updateDoc(docRef, {
+                  name,
+              });
+          }
+          toast.success("Profile updated!")
+      } catch (error) {
+          toast.error("Can not update profile!");
+      }
   }
   return (
     <div>
@@ -25,9 +51,10 @@ export default function Profile() {
                       type='text' 
                       id='name' 
                       value={name}
-                      disabled
-                      className="w-[65%] px-4 py-1 text-md text-black bg-white border border-gray-300
-                      rounded transition ease-in-out mb-5"/>
+                      disabled={!changeDetail}
+                      onChange={onChange}
+                      className={`w-[65%] px-4 py-1 text-md text-black bg-white border border-gray-300
+                      rounded transition ease-in-out mb-5 ${changeDetail && "bg-red-200 focus:bg-red-200"}`}/>
 
                       { /* email input */ } 
                       <input 
@@ -40,11 +67,20 @@ export default function Profile() {
 
                       <div className="flex whitespace-nowrap text-sm sm:text-md mb-5">
                           <p className="flex items-center">Do you want to make changes?
-                            <span className="ml-2 text-red-600 hover:text-red-800 transition 
-                            ease-in-out duration-200 cursor-pointer">Edit</span>
+                            <span 
+                            onClick={() => {
+                              changeDetail && onSubmit();
+                              setChangeDetail((prevState) => !prevState);
+                            }}
+                            className="ml-2 text-red-600 hover:text-red-800 transition 
+                            ease-in-out duration-200 cursor-pointer">
+                            {changeDetail ? "Apply change" : "Edit"}
+                            </span>
                           </p>
                       </div>
-                      <button onClick={onLogout} className="bg-blue-600 text-white px-3 py-1 ml-40 text-sm font-medium
+                      <button 
+                      onClick={onLogout} 
+                      className="bg-blue-600 text-white px-3 py-1 ml-40 text-sm font-medium
                       rounded shadow-lg hover:bg-blue-800 transition duration-150 ease-in-out 
                       hover:shadow-lg active:bg-blue-900">Sign Out</button>
                 </form>
