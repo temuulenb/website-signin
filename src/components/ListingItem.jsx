@@ -6,8 +6,7 @@ export default function ListingItem({listing, id}) {
   return <li className="bg-white relative flex flex-col justify-between items-center 
          shadow-md hover:shadow-xl rounded overflow-hidden transition-shadow duration-150 m-[10px]">
             <Link className="contents" to={`/category/${listing.type}/${id}`}>
-                <img className="h-[16
-                0px] w-full object-cover hover:scale-105 
+                <img className="h-[200px] w-[100%] object-contain hover:scale-105 
                 transition-scale duration-200 ease-in" 
                 loading='lazy'
                 src={listing.imgUrls[0]} />
@@ -21,16 +20,15 @@ export default function ListingItem({listing, id}) {
                 <p className="px-1">{listing.description}</p>
                 <div className="flex space-x-3">
                     <div className="bg-blue-300 rounded px-2">
-                        <p>{listing.amount > 1 ? `${listing.amount} Quantity` : "Quantity:1"}</p>
+                        <p>{listing.amount > 1 ? `Quantity: ${listing.amount}` : "Quantity:1"}</p>
                     </div>
-                    <div className="">
+                    <div className="bg-yellow-200 rounded px-2">
                         <p>{listing.appearance}</p>
                     </div>
                 </div>
-                <p className="px-1">
+                <p className="px-1 mt-2 font-medium">
                     ${listing.price}
-                </p>
-                
+                </p>        
             </div>
     </li>;
 }
