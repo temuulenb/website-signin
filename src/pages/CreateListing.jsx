@@ -6,11 +6,11 @@ import {
     uploadBytesResumable,
     getDownloadURL,
   } from "firebase/storage";
-  import { getAuth } from "firebase/auth";
-  import { v4 as uuidv4 } from "uuid";
-  import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-  import { db } from "../firebase";
-  import { useNavigate } from "react-router-dom";
+import { getAuth } from "firebase/auth";
+import { v4 as uuidv4 } from "uuid";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { db } from "../firebase";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateListing() {
   const [loading, setLoading] = useState(false);
@@ -115,10 +115,12 @@ export default function CreateListing() {
         const formDataCopy = {
             ...formData,
             imgUrls,
-            Timestamp: serverTimestamp(),
+            timestamp: serverTimestamp(),
+            userRef: auth.currentUser.uid,
         };
         delete formDataCopy.images;
-        const docRef = await addDoc(collection(db, "listing"), formDataCopy);
+        const docRef = await addDoc(collection(db, "listings"), formDataCopy);
+        
         toast.success("Uploaded");
         navigate(`/category/${formDataCopy.type}/${docRef.id}`);
   }
@@ -190,18 +192,18 @@ export default function CreateListing() {
                 <div>
                     <p className='text-md font-semibold'>Appearance</p>
                     <select 
-                          id='appearance' 
-                          value={appearance} 
-                          onChange={onChange} 
-                          required
-                          className="pl-1 py-2 flex text-s text-black bg-white border border-black 
-                          rounded transition duration-150 ease-in-out focus:text-black focus:bg-white"
+                        id='appearance' 
+                        value={appearance} 
+                        onChange={onChange} 
+                        required
+                        className="pl-1 py-2 flex text-s text-black bg-white border border-black 
+                        rounded transition duration-150 ease-in-out focus:text-black focus:bg-white"
                     >
-                          <option selected value="Please select your choice">Please select</option>
-                          <option value="1">New</option>
-                          <option value="2">Almost New</option>
-                          <option value="3">Old</option>
-                          <option value="4">Other</option>
+                        <option selected value="Please select your choice">Please select</option>
+                        <option value="New">New</option>
+                        <option value="Almost New">Almost New</option>
+                        <option value="Old">Old</option>
+                        <option value="Other">Other</option>    
                     </select>
                 </div>
             </div>
