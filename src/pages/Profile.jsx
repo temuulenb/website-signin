@@ -3,8 +3,9 @@ import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify';
 import { db } from '../firebase';
-import { updateDoc, doc, collection, query, where, orderBy, getDocs } from 'firebase/firestore';
+import { updateDoc, doc, collection, query, where, orderBy, getDocs, deleteDoc } from 'firebase/firestore';
 import ListingItem from '../components/ListingItem';
+
 
 export default function Profile() {
   const auth = getAuth();
@@ -60,12 +61,27 @@ export default function Profile() {
             setListings(listings);
             setLoading(false);
         }
-        fetchUserListings();
+        fetchUserListings();    
   }, [auth.currentUser.uid]);
+  async function onDelete(listingID){
+    if(window.confirm("Are you sure you want to delete?")){
+        await deleteDoc(doc(db, "listings", listingID));
+        const updatedListings = listings.filter(
+            (listing) => listing.id !== listingID
+        );
+        setListings(updatedListings);
+        toast.success("Post deleted!")
+    }
+  }
+  function onEdit(listingID){
+        navigate(`/edit-listing/${listingID}`)
+  }
+  
   return (
-    <div>
+    <>
         <section className="max-w-6xl mx-auto flex flex-col justify-center items-center">
-            <h1 className="text-2xl text-center mt-6 font-bold">My Profile</h1>
+            <h1 className="text-2xl pr-20 mt-6 font-bold">My Profile</h1>
+            
             <div className="w-full md:w-[50%] mt-6 px-3">
                 <form>
                       { /* name input */ } 
@@ -115,22 +131,27 @@ export default function Profile() {
                 </button>
             </div>
         </section>
-        <div className="mt-8 px-6">
+        <div className="mt-16 px-6">
             {!loading && listings.length > 0 && (
                 <>
-                    <h2 className="text-l mb-8 mr-16 text-center font-semibold">My announcements</h2>
+                    <h2 className="text-xl mb-8 mr-16 text-center font-semibold">My Announcements</h2>
                     <ul className="sm:grid sm:grid-col-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5
-                    mb-6 mt-16">
+                    mb-6 mt-10">
                         {listings.map((listing) => (
                             <ListingItem 
                             key={listing.id} 
                             id={listing.id} 
-                            listing={listing.data}/>
+                            listing={listing.data}
+                            onDelete={() => onDelete(listing.id)}
+                            onEdit={() => onEdit(listing.id)}
+                            />
                         ))}
                     </ul>
                 </>
             )}
         </div>
-    </div>
+    </>
   );
 }
+
+

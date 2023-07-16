@@ -1,8 +1,10 @@
 import React from 'react'
 import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
+import {FaTrash} from 'react-icons/fa';
+import {MdEdit} from 'react-icons/md';
 
-export default function ListingItem({listing, id}) {
+export default function ListingItem({listing, id, onEdit, onDelete}) {
   return <li className="bg-white relative flex flex-col justify-between items-center 
          shadow-md hover:shadow-xl rounded overflow-hidden transition-shadow duration-150 m-[10px]">
             <Link className="contents" to={`/category/${listing.type}/${id}`}>
@@ -12,7 +14,7 @@ export default function ListingItem({listing, id}) {
                 src={listing.imgUrls[0]} />
             </Link>
             <Moment className="absolute top-2 left-2 bg-gray-200 text-sm font-semibold 
-            rounded-md px-2 py-1 shadow-lg shadow-fuchsia-600" fromNow>
+            rounded-md px-2 py-1 shadow-lg shadow-gray-600" fromNow>
                 {listing.timestamp?.toDate()}
             </Moment>
             <div className="w-full p-[10px]">
@@ -30,5 +32,14 @@ export default function ListingItem({listing, id}) {
                     ${listing.price}
                 </p>        
             </div>
-    </li>;
+            {onDelete && (
+                <FaTrash className="absolute bottom-2 right-2 h-[14px] cursor-pointer text-red-600"
+                onClick={() => onDelete(listing.id)} />
+            )}
+            {onEdit && (
+                <MdEdit className="absolute bottom-2 right-7 h-[20px] cursor-pointer text-black"
+                onClick={() => onEdit(listing.id)} />
+            )};
+
+        </li>
 }

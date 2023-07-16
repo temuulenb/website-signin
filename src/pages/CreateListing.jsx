@@ -161,13 +161,13 @@ export default function CreateListing() {
                     trade
                 </button>
             </div>
-            <p className="text-m mt-10 font-semibold">Name</p> 
+            <p className="text-m mt-10 font-semibold">Student ID</p> 
             <input 
-            type='text' 
+            type='number' 
             id='name'
             value={name} 
             onChange={onChange}
-            placeholder='Enter Your Full Name'
+            placeholder='Enter Your Student ID'
             maxLength="32" 
             minLength="10" 
             required 
@@ -252,13 +252,16 @@ export default function CreateListing() {
                 className="w-full px-3 py-1.5 text-gray-700 bg-white border border-gray-300 rounded transition 
                 duration-150 ease-in-out focus:bg-white focus:border-slate-600 mb-10"/>
             </div>  
-            <button type='submit' 
-            className="mb-6 w-full px-7 py-3 bg-blue-600 text-white font-medium text-sm uppercase rounded 
-            shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg
-            active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-            >
-              Upload</button>
-        </form>
+            <div className="flex mb-6">
+                <button type='submit' 
+                className="w-[30%] ml-[160px] py-2.5 bg-blue-600 text-white font-medium text-sm uppercase rounded 
+                shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg
+                active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                >
+                Upload
+                </button>
+            </div>
+        </form>  
     </div>
   )
 }
