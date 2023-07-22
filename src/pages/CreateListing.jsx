@@ -13,9 +13,10 @@ import { db } from "../firebase";
 import { useNavigate } from "react-router-dom";
 
 export default function CreateListing() {
-  const [loading, setLoading] = useState(false);
+  
   const navigate = useNavigate();
   const auth = getAuth();
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
       type: "trade",
       name: "",
@@ -120,7 +121,7 @@ export default function CreateListing() {
         };
         delete formDataCopy.images;
         const docRef = await addDoc(collection(db, "listings"), formDataCopy);
-        
+        setLoading(false);
         toast.success("Uploaded");
         navigate(`/category/${formDataCopy.type}/${docRef.id}`);
   }

@@ -1,10 +1,11 @@
-import { getAuth, updateProfile } from 'firebase/auth';
+import { getAuth, updateCurrentUser, updateProfile } from 'firebase/auth';
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify';
 import { db } from '../firebase';
 import { updateDoc, doc, collection, query, where, orderBy, getDocs, deleteDoc } from 'firebase/firestore';
 import ListingItem from '../components/ListingItem';
+ 
 
 
 export default function Profile() {
@@ -28,6 +29,7 @@ export default function Profile() {
           [e.target.id]: e.target.value,
       }));
   }
+  
   async function onSubmit() {
       try {
           if(auth.currentUser.displayName !== name){
@@ -76,12 +78,15 @@ export default function Profile() {
   function onEdit(listingID){
         navigate(`/edit-listing/${listingID}`)
   }
+
   
   return (
     <>
-        <section className="max-w-6xl mx-auto flex flex-col justify-center items-center">
-            <h1 className="text-2xl pr-20 mt-6 font-bold">My Profile</h1>
-            
+        <section className="max-w-6xl mx-auto flex flex-col justify-center items-center mt-10">
+            <div className="flex">
+                
+                <h1 className="text-2xl pr-20 mt-6 font-bold">My Profile</h1>
+            </div> 
             <div className="w-full md:w-[50%] mt-6 px-3">
                 <form>
                       { /* name input */ } 

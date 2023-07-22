@@ -7,13 +7,13 @@ export default function Home() {
     <div>
       <ul id = "navbar">
         <li>
-          <a href = "">How it works</a>
+          <a href = "/">How it works</a>
         </li>
         <li>
-          <a href = "">About</a>
+          <a href = "/">About</a>
         </li>
         <li>
-          <a href = "">Contact Us</a>
+          <a href = "/">Contact Us</a>
         </li>
       </ul>
     </div>

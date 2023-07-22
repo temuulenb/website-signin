@@ -3,15 +3,15 @@ nav{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #FFD631;
     padding: 20px 80px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.06);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.06);
 
 }
 #navbar{
     display: flex;
     align-items: center;
     justify-content: center;    
+    background: #FFD631;    
 }
 
 #navbar li{
@@ -23,9 +23,12 @@ nav{
     text-decoration: none;
     font-size: 1.3rem;
     font-weight: 600;
-    color: #000000;
+    color: #ffffff;
 }
 
 #navbar li a:hover{
     color: #fff600;
+}
+#navbar li a:active{
+    opacity: 0.5;
 }

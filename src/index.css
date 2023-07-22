@@ -6,3 +6,17 @@
 body {
     background-color: rgb(240, 253, 244);
 }
+
+
+html::-webkit-scrollbar{
+    display: none;
+}
+
+html {
+    scrollbar-width: none;
+}
+
+.fields {
+    margin: 50px 0px;
+}
+
